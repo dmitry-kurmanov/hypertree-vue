@@ -1,28 +1,86 @@
+/* eslint-disable */
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Hello Vue.js !</h1>
+    <HyperTree :config="config" :onChange="setHyperTreeLastAction"/>
+    <div>
+      Hypertree last action (please try to expand/collapse nodes): <strong>{{ hyperTreeLastAction }}</strong>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HyperTree from "./components/HyperTree.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    HyperTree
+  },
+  data: () => ({
+    config: {
+      title: "Hyper Tree Title",
+      nodes: [
+        {
+          text: "Node1",
+          children: [
+            {
+              text: "Node5"
+            }
+          ]
+        },
+        {
+          text: "Node2",
+          children: [
+            {
+              text: "Node6",
+              children: [
+                {
+                  text: "Node10"
+                }
+              ]
+            },
+            {
+              text: "Node7"
+            }
+          ]
+        },
+        {
+          text: "Node3",
+          children: [
+            {
+              text: "Node8"
+            },
+            {
+              text: "Node9",
+              children: [
+                {
+                  text: "Node11"
+                },
+                {
+                  text: "Node12"
+                },
+                {
+                  text: "Node13"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          text: "Node4"
+        }
+      ]
+    },
+    hyperTreeLastAction: ""
+  }),
+  methods: {
+    setHyperTreeLastAction: function(actionName) {
+      this.hyperTreeLastAction = actionName;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
